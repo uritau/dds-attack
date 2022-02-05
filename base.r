@@ -40,12 +40,16 @@ print(paste("[info] The number of elements is:",length(raw_object)))
 
 
 
-## Work withc "metadata"
+## 3 Work with project data
 
-### Named List with all elements
+### Create lists with information about rows
+headers_rows <- llply(raw_object, function(x) {x = names(x)})
 headers_list <- unique(unlist(llply(raw_object, function(x) {x = names(x)})))
 names(headers_list) <- unique(unlist(llply(raw_object, function(x) {x = names(x)})))
+
+### Count and order this metadata
 ocurrences <- llply(headers_list, function(y) sum(laply(headers_rows,function(x) {x = y %in% x})))
 ocurrences <- ocurrences[order(unlist(ocurrences),decreasing=TRUE)]
 
+### Show relevant information
 print(ocurrences)
